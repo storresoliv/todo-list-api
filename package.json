@@ -4,6 +4,7 @@
   "description": "This is a todo api for save a list of items",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon src/index.js",
     "start": "node src/index.js"
   },
   "keywords": [
