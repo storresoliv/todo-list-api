@@ -6,7 +6,11 @@
   "scripts": {
     "start": "nodemon src/index.js"
   },
-  "keywords": ["todo", "list", "api"],
+  "keywords": [
+    "todo",
+    "list",
+    "api"
+  ],
   "author": "Sebastian Torres",
   "license": "ISC",
   "dependencies": {
