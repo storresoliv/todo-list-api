@@ -1,15 +1,11 @@
 import { IRequest, IResponse, IController, Router, IItem } from "@models";
 
-export class ItemsController implements IController {
-  public path = "/items";
+import { IList } from "./models/list.interface";
 
-  private items: IItem[] = [
-    {
-      id: 1,
-      text: "Dolor sit amet",
-      active: false
-    }
-  ];
+export class ListsController implements IController {
+  public path = "/lists";
+
+  private items: IList = [];
 
   findByID = (id: number) => this.items.find(item => item.id == id);
 
@@ -41,9 +37,9 @@ export class ItemsController implements IController {
   createAItem = (request: IRequest, response: IResponse) => {
     if (this.validateParams(request.body)) {
       const newItem: IItem = {
-        id: Date.now(),
+        id: 1,
         text: request.body.text,
-        active: true
+        active: false
       };
 
       this.items.push(newItem);

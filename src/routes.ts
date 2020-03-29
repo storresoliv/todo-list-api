@@ -1,3 +1,9 @@
-import { ItemsController } from "./features/items/items.controller";
+import { IController } from "@models";
 
-export const routes = [new ItemsController()];
+import { ItemsController } from "./features/items/items.controller";
+import { ListsController } from "./features/lists/lists.controller";
+
+export const routes: IController[] = [
+  new ItemsController(),
+  new ListsController()
+];

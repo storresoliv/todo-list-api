@@ -1,11 +1,13 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
+import { IController } from "./models";
+import { RouterInstance } from "./router";
 
 export class App {
   public app: express.Application;
   public port: number;
 
-  constructor(controllers, port) {
+  constructor(controllers: IController[], port) {
     this.app = express();
     this.port = port;
 
@@ -18,9 +20,9 @@ export class App {
     this.app.use(bodyParser.urlencoded({ extended: false }));
   }
 
-  private initializeControllers(controllers) {
+  private initializeControllers(controllers: IController[]) {
     controllers.forEach(controller => {
-      this.app.use("/", controller.router);
+      this.app.use("/", controller.initializeRoutes(RouterInstance));
     });
   }
 
