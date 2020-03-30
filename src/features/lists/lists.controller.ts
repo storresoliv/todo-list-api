@@ -5,52 +5,52 @@ import { IList } from "./models/list.interface";
 export class ListsController implements IController {
   public path = "/lists";
 
-  private items: IList = [];
+  private list: IList = [];
 
-  findByID = (id: number) => this.items.find(item => item.id == id);
+  findByID = (id: number) => this.list.find(item => item.id == id);
 
   validateParams = (params: { text: string }) => params.text;
 
   initializeRoutes(router: Router): Router {
-    router.get(this.path, this.getAllItems);
-    router.get(this.path + "/:id", this.getItem);
-    router.post(this.path, this.createAItem);
-    router.delete(this.path, this.removeItem);
+    router.get(this.path, this.getAllLists);
+    router.get(this.path + "/:id", this.getList);
+    router.post(this.path, this.createAList);
+    router.delete(this.path, this.removeList);
 
     return router;
   }
 
-  getAllItems = (request: IRequest, response: IResponse) => {
-    response.send(this.items);
+  getAllLists = (request: IRequest, response: IResponse) => {
+    response.send(this.list);
   };
 
-  getItem = (request: IRequest, response: IResponse) => {
+  getList = (request: IRequest, response: IResponse) => {
     const item = this.findByID(request.params.id);
     if (item) {
       return response.json(item);
     }
     response
       .status(404)
-      .json({ error: `Item ${request.params.id} is not found` });
+      .json({ error: `List ${request.params.id} is not found` });
   };
 
-  createAItem = (request: IRequest, response: IResponse) => {
+  createAList = (request: IRequest, response: IResponse) => {
     if (this.validateParams(request.body)) {
-      const newItem: IItem = {
+      const newList: IItem = {
         id: 1,
         text: request.body.text,
         active: false
       };
 
-      this.items.push(newItem);
+      this.list.push(newList);
 
-      return response.status(201).json(newItem);
+      return response.status(201).json(newList);
     }
 
     response.json({ error: "Missing `text` attribute" });
   };
 
-  removeItem = (request: IRequest, response: IResponse) => {
+  removeList = (request: IRequest, response: IResponse) => {
     response
       .status(500)
       .json({ error: "DELETE method is not implemented yet" });
